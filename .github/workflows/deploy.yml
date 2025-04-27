@@ -22,7 +22,7 @@ jobs:
       run: |
         ssh -o StrictHostKeyChecking=no root@${{ secrets.SERVER_IP }} << 'EOF'
           echo "Connecting to server..."
-          cd /home/frontend/ecommerce-app
+          cd /var/www/html/ecommerce-app  # Ubah direktori ke /var/www/html/ecommerce-app
           git pull origin main
           pm2 restart ecommerce-app --update-env
           echo "Deployment finished"
