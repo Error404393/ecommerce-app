@@ -18,10 +18,12 @@ jobs:
       with:
         ssh-private-key: ${{ secrets.SERVER_SSH_KEY }}
 
-    - name: Deploy to Server
+    - name: Debug SSH Connection
       run: |
         ssh -o StrictHostKeyChecking=no root@${{ secrets.SERVER_IP }} << 'EOF'
+          echo "Connecting to server..."
           cd /home/frontend/ecommerce-app
           git pull origin main
-          pm2 restart ecommerce-app
+          pm2 restart ecommerce-app --update-env
+          echo "Deployment finished"
         EOF
